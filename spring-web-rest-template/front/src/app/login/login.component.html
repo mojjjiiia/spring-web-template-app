@@ -1,0 +1,7 @@
+<p>login works!</p>
+
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
+    <input  name="login"  ngModel  required>
+    <input name="password" ngModel type="password" required >
+    <button>Submit</button>
+</form>

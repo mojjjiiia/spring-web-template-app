@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms'
 import { AuthService } from '../services/auth/auth.service';
+import { LockAppService } from '../services/lockApp/lock-app.service';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +9,18 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private lockAppService: LockAppService) { }
 
   async onSubmit(form: NgForm) {
-    let success: boolean = await this.authService.authenticate(form.value.login, form.value.password);
-    if (success) {
+    this.lockAppService.showSpinner();
+    // let success: boolean = await this.authService.authenticate(form.value.login, form.value.password);
+    // if (success) {
       //redirect
-    }
-    else {
+    // }
+    // else {
       // alert message
-    }
+    // }
+    // this.lockAppService.hideSpinner();
 
   }
 

@@ -15,25 +15,30 @@ export class AuthService {
   }
 
 
-  async authenticate(login: String, password: String): Promise<boolean> {
-    function handleSuccess(resp: Authentication): boolean {
-      localStorage.setItem('currentUser', resp.username as string);
-      localStorage.setItem('token', resp.token as string);
-      return true
-    }
+  authenticate(login: String, password: String): Observable<Authentication> {
+    // function handleSuccess(resp: Authentication): boolean {
+    //   localStorage.setItem('currentUser', resp.username as string);
+    //   localStorage.setItem('token', resp.token as string);
+    //   return true
+    // }
 
-    function handleError(): boolean {
-      console.warn('Wrong login or passsword')
-      return false
-    }
-      return await this.http
-        .post<Authentication>(this.apiUrl + '/api/v1/auth/login', { username: login, password: password })
-        .toPromise().then(handleSuccess).catch(handleError);
+    // function handleError(): boolean {
+    //   console.warn('Wrong login or passsword')
+    //   return false
+    // }
+      return this.http
+        .post<Authentication>(this.apiUrl + '/api/v1/auth/login', { username: login, password: password });
   }
 
   logout(): void {
+    console.log(123)
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
+  }
+
+  testLogin(): void {
+    localStorage.setItem('currentUser', 'mojjjiiia');
+    localStorage.setItem('token', 'abacaba123');
   }
   
 
